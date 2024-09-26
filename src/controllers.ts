@@ -2,20 +2,41 @@ import { Request, Response, NextFunction } from "express"; // Import necessary t
 
 // Middleware to verify the token
 export const verifyToken = (req: Request, res: Response, next: NextFunction): void => {
-  const authHeader = req.headers["authorization"]; // Get the Authorization header from the request
-  const token = "CSCI262"; // Expected token
-
-  // Check if the Authorization header exists and matches the expected token
-  if (authHeader && authHeader === token) {
-    next(); // If the token is valid, proceed to the next middleware or route handler
-  } else {
-    res.sendStatus(401); // If the token is invalid, respond with a 401 Unauthorized status
+  const authHeader = req.headers['authorization'];
+  console.log('Authorization header:', authHeader);
+  if (!authHeader) {
+    console.log('Authorization header missing');
+    res.sendStatus(401);
+    return;
   }
+
+  const token = parseInt(authHeader, 10);
+  const modulo = 7;
+  const target = 3;
+  console.log('Token:', token);
+  if (!isNaN(token) && token % modulo === target) {
+    console.log('Token is valid');
+    next();
+  } else {
+    console.log('Token is invalid');
+    res.sendStatus(401);
+  }
+};
+
+// Function to generate a token that satisfies the modulo condition
+function generateToken(): string {
+  const modulo = 7; // Hardcoded modulo value
+  const target = 3; // Hardcoded target value
+  let token: number;
+  do {
+    token = Math.floor(Math.random() * 1000000); // Generate a random number between 0 and 999999
+  } while (token % modulo !== target);
+  return token.toString();
 }
 
 // Controller to return a token
 export const getToken = (req: Request, res: Response) => {
-  const token = "CSCI262"; // Static token (replace with dynamic token generation in a real app)
+  const token = generateToken(); // Static token (replace with dynamic token generation in a real app)
   res.json({ token }); // Respond with the token as a JSON object
 }
 

@@ -1,7 +1,7 @@
 import { Router } from "express"; // Import the Router class from the express package
 import { verifyToken, getToken, protectedRoute, getServerTime } from "./controllers"; // Import the controller functions and middleware from controllers.ts
 
-const router = Router(); // Create a new router object
+const router: Router = Router(); // Create a new router object
 
 // Define the /token route
 // Method: GET
