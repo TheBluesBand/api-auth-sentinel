@@ -31,10 +31,16 @@ jobs:
           echo $! > server.pid
           echo "Server started successfully"
 
-      - name: Run tests
+      - name: Run tests and collect coverage
         run: |
-          npm test
-          echo "Tests completed successfully"
+          npm test -- --coverage
+          echo "Tests and coverage collection completed successfully"
+  
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v3
+        with:
+          name: coverage-report
+          path: coverage
 
       - name: Stop the server
         run: |
