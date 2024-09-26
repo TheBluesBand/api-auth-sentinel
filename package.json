@@ -14,6 +14,7 @@
     "build": "tsc",
     "start": "node build/index.js",
     "build-and-start": "npm run build && npm start",
+    "stop": "pkill -f node",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
