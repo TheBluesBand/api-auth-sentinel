@@ -4,7 +4,7 @@ import type { Config } from '@jest/types';
 const config: Config.InitialOptions = {
   preset: 'ts-jest', // Use ts-jest preset for TypeScript support
   testEnvironment: 'node', // Set the test environment to Node.js
-  testMatch: ['**/build/**/*.test.js', '**/build/**/*.spec.js'], // Match test files in the build directory
+  testMatch: ['**/src/__tests__/**/*.ts', '**/?(*.)+(spec|test).ts'], // Match test files in the src directory
   moduleFileExtensions: ['ts', 'js', 'json', 'node'], // Recognize these file extensions
   collectCoverage: true, // Enable coverage collection
   coverageDirectory: 'coverage', // Output coverage reports to the 'coverage' directory
