@@ -1,22 +1,26 @@
-import express from "express";
+import express, { Request, Response, NextFunction } from "express";
 
-const app = express();
-const port = 3000;
+const app: express.Application = express();
+const port: number = 3000;
 
 // Middleware to verify the token
-const verifyToken = (req: any, res: any, next: any) => {
-  const authHeader = req.headers.authorization;
+const verifyToken = (req: Request, res: Response, next: NextFunction): void => {
+  const authHeader = req.headers["authorization"];
   if (authHeader) {
     next();
   } else {
-    return res.sendStatus(401); // Unauthorized
+    res.sendStatus(401); // Unauthorized
   }
 };
 
 // Protected route (requires authentication)
-app.get("/protected", verifyToken, (req, res) => {
-  res.send(`Hello! You are authenticated.`);
-});
+app.get(
+  "/protected",
+  verifyToken,
+  (req: express.Request, res: express.Response) => {
+    res.send(`Hello! You are authenticated.`);
+  }
+);
 
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
