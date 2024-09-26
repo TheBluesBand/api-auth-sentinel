@@ -39,10 +39,6 @@ This repository demonstrates how to implement middleware authentication in an Ex
 
 ## License
 
-This project is licensed under the MIT License.
-
-## License
-
 The MIT License (MIT)
 
 Copyright (c) 2023 Jake McCoy
