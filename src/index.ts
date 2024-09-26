@@ -1,38 +1,11 @@
-import express, { Request, Response, NextFunction } from "express";
+import express from "express"; // Import the express module
+import router from "./routes"; // Import the router from the routes module
 
-const app: express.Application = express();
-const port: number = 3000;
+const app: express.Application = express(); // Create an instance of an Express application
+const port: number = 3000; // Define the port number on which the server will listen
 
-// Middleware to verify the token
-const verifyToken = (req: Request, res: Response, next: NextFunction): void => {
-  const authHeader = req.headers["authorization"];
-  const token = "CSCI262"; // Expected token
-
-  if (authHeader && authHeader === token) {
-    next();
-  } else {
-    res.sendStatus(401); // Unauthorized
-  }
-};
-
-// Route to return a token
-app.get("/token", (req: Request, res: Response) => {
-  const token = "CSCI262"; // Replace with dynamic token generation in a real app
-  res.json({ token });
-});
-
-//Curl command to send the token
-// curl -H "Authorization: CSCI262" http://localhost:3000/protected
-
-// Protected route (requires authentication)
-app.get(
-  "/protected",
-  verifyToken,
-  (req: express.Request, res: express.Response) => {
-    res.send(`Hello! You are authenticated.`);
-  }
-);
+app.use("/", router); // Use the imported router for handling routes starting from the root path
 
 app.listen(port, () => {
-  console.log(`Server listening on port ${port}`);
+  console.log(`Server listening on port ${port}`); // Start the server and listen on the defined port
 });
