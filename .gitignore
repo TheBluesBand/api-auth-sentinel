@@ -38,3 +38,6 @@ src/.DS_Store
 
 # Exclude Yarn error logs (development-specific)
 yarn-error.log
+
+# Exclude test coverage reports (generated files)
+coverage

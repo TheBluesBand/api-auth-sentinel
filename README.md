@@ -22,9 +22,9 @@ This repository demonstrates how to implement middleware authentication in an Ex
    `node -v`
    `#Should output v20.x.x or later`
 
-## Usage
+## Building the Project
 
-1. Build the Typescript Files:
+1. Build the project files:
    `npm run build`
 
 2. Start the server:
@@ -34,11 +34,24 @@ This repository demonstrates how to implement middleware authentication in an Ex
 1. You can run and build the server in one step:
    ` npm run build-and-start`
 
+
+## Testing
+
+- To run tests, use:
+   `npm test`
+- This will execute all the test files and generate a code coverage report.
+
+
+##### Reviewing Code Coverage
+
+The code coverage report is generated in the coverage directory. You can view the HTML report by opening `coverage/lcov-report/index.html` in your browser.
+
 ## Scripts
 
 - `npm run build`: Compiles the TypeScript files into JavaScript.
 - `npm start`: Runs the compiled JavaScript files using Node.js.
 - `npm run build-and-start`: Compiles the TypeScript files and then starts the server.
+- `npm test`: Runs the tests and generates a coverage report.
 
 ## License
 
