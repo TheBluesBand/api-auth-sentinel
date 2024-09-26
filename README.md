@@ -18,6 +18,9 @@ This repository demonstrates how to implement middleware authentication in an Ex
    ```
 2. Install Dependencies:
    `npm i`
+3. Ensure you have Node.js version 20 or later installed:
+   `node -v`
+   `#Should output v20.x.x or later`
 
 ## Usage
 
