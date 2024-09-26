@@ -6,6 +6,7 @@ This repository demonstrates how to implement middleware authentication in an Ex
 
 - [Installation](#installation)
 - [Usage](#usage)
+- [Testing](#testing)
 - [Scripts](#scripts)
 - [License](#license)
 
