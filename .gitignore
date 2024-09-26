@@ -1,0 +1,40 @@
+# Exclude environment-specific configuration
+docker-compose.yml
+
+# Exclude large directory containing installed dependencies
+node_modules
+
+# Exclude build output directory (generated files)
+build
+
+# Exclude generic output directory (temporary data)
+out
+
+# Exclude debug logs for development purposes
+database-debug.log
+firestore-debug.log
+ui-debug.log
+
+# Exclude Firebase Hosting cache files (project-specific)
+.firebase/hosting.YnVpbGQ.cache
+.firebase/hosting.cHVibGlj.cache
+
+# Exclude desktop customization files for macOS
+src/.DS_Store
+**/.DS_Store  # Exclude all .DS_Store files recursively
+
+# Exclude IDE-specific configuration files
+.idea
+
+# Exclude desktop customization files for various systems
+.DS_Store
+
+# Exclude environment variable files (may contain sensitive data)
+.env
+.env.prod
+
+# Exclude editor-specific configuration files
+.vscode
+
+# Exclude Yarn error logs (development-specific)
+yarn-error.log
