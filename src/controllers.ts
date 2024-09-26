@@ -23,3 +23,9 @@ export const getToken = (req: Request, res: Response) => {
 export const protectedRoute = (req: Request, res: Response) => {
   res.send(`Hello! You are authenticated.`); // Respond with a message indicating the user is authenticated
 }
+
+// Controller to return the current date and time
+export const getServerTime = (req: Request, res: Response) => {
+  const currentTime = new Date(); // Get the current date and time
+  res.json({ currentTime }); // Respond with the current date and time as a JSON object
+}
