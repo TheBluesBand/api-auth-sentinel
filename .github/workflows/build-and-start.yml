@@ -1,5 +1,4 @@
 name: Build and Start
-
 on:
   push:
     branches:
@@ -37,5 +36,5 @@ jobs:
 
       - name: Stop the server
         run: |
-          npm run stop
+          kill $(cat server.pid)
           echo "Server stopped successfully"
