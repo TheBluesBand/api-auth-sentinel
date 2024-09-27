@@ -1,11 +1,15 @@
 import { Request, Response, NextFunction } from "express"; // Import necessary types from the express package
 
 // Middleware to verify the token
-export const verifyToken = (req: Request, res: Response, next: NextFunction): void => {
-  const authHeader = req.headers['authorization'];
-  console.log('Authorization header:', authHeader);
+export const verifyToken = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): void => {
+  const authHeader = req.headers["authorization"];
+  console.log("Authorization header:", authHeader);
   if (!authHeader) {
-    console.log('Authorization header missing');
+    console.log("Authorization header missing");
     res.sendStatus(401);
     return;
   }
@@ -13,12 +17,12 @@ export const verifyToken = (req: Request, res: Response, next: NextFunction): vo
   const token = parseInt(authHeader, 10);
   const modulo = 7;
   const target = 3;
-  console.log('Token:', token);
+  console.log("Token:", token);
   if (!isNaN(token) && token % modulo === target) {
-    console.log('Token is valid');
+    console.log("Token is valid");
     next();
   } else {
-    console.log('Token is invalid');
+    console.log("Token is invalid");
     res.sendStatus(401);
   }
 };
@@ -38,15 +42,40 @@ function generateToken(): string {
 export const getToken = (req: Request, res: Response) => {
   const token = generateToken(); // Static token (replace with dynamic token generation in a real app)
   res.json({ token }); // Respond with the token as a JSON object
-}
+};
 
 // Controller for the protected route
 export const protectedRoute = (req: Request, res: Response) => {
   res.send(`Hello! You are authenticated.`); // Respond with a message indicating the user is authenticated
-}
+};
 
 // Controller to return the current date and time
 export const getServerTime = (req: Request, res: Response) => {
   const currentTime = new Date(); // Get the current date and time
   res.json({ currentTime }); // Respond with the current date and time as a JSON object
-}
+};
+
+// Controller to handle incorrect endpoints
+export const handleIncorrectEndpoint = (req: Request, res: Response) => {
+  res.status(404).json({
+    message: "You have hit an incorrect endpoint.",
+    availableEndpoints: [
+      {
+        method: "GET",
+        path: "/token",
+        description: "Generates and returns a token",
+      },
+      {
+        method: "GET",
+        path: "/protected",
+        description:
+          "Protected route that requires authentication header and token",
+      },
+      {
+        method: "GET",
+        path: "/server-time",
+        description: "Returns the current server date and time",
+      },
+    ],
+  });
+};

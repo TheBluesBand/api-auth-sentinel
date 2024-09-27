@@ -1,28 +1,28 @@
-import request from 'supertest';
-import express, { Request, Response, NextFunction } from 'express';
-import { getToken, verifyToken } from '../controllers';
-import router from '../routes';
+import request from "supertest";
+import express, { Request, Response, NextFunction } from "express";
+import { getToken, verifyToken } from "../controllers";
+import router from "../routes";
 
 const app = express();
-app.use('/', router);
+app.use("/", router);
 
-describe('GET /token', () => {
-  it('should return a token that satisfies the modulo condition', async () => {
-    const response = await request(app).get('/token');
+describe("GET /token", () => {
+  it("should return a token that satisfies the modulo condition", async () => {
+    const response = await request(app).get("/token");
     const token = response.body.token;
     expect(token % 7).toBe(3); // Check if the token satisfies the condition
   });
 });
 
-describe('verifyToken middleware', () => {
-  it('should call next if the token is valid', () => {
+describe("verifyToken middleware", () => {
+  it("should call next if the token is valid", () => {
     const req = {
       headers: {
-        authorization: '1000002' // Example token that satisfies the condition
-      }
+        authorization: "1000002", // Example token that satisfies the condition
+      },
     } as unknown as Request;
     const res = {
-      sendStatus: jest.fn()
+      sendStatus: jest.fn(),
     } as unknown as Response;
     const next = jest.fn() as NextFunction;
 
@@ -32,14 +32,14 @@ describe('verifyToken middleware', () => {
     expect(res.sendStatus).not.toHaveBeenCalled(); // Check if sendStatus was not called
   });
 
-  it('should respond with 401 if the token is invalid', () => {
+  it("should respond with 401 if the token is invalid", () => {
     const req = {
       headers: {
-        authorization: '1000004' // Example token that does not satisfy the condition
-      }
+        authorization: "1000004", // Example token that does not satisfy the condition
+      },
     } as unknown as Request;
     const res = {
-      sendStatus: jest.fn()
+      sendStatus: jest.fn(),
     } as unknown as Response;
     const next = jest.fn() as NextFunction;
 
@@ -49,12 +49,12 @@ describe('verifyToken middleware', () => {
     expect(res.sendStatus).toHaveBeenCalledWith(401); // Check if sendStatus was called with 401
   });
 
-  it('should respond with 401 if the authorization header is missing', () => {
+  it("should respond with 401 if the authorization header is missing", () => {
     const req = {
-      headers: {}
+      headers: {},
     } as unknown as Request;
     const res = {
-      sendStatus: jest.fn()
+      sendStatus: jest.fn(),
     } as unknown as Response;
     const next = jest.fn() as NextFunction;
 
@@ -65,10 +65,38 @@ describe('verifyToken middleware', () => {
   });
 });
 
-describe('GET /server-time', () => {
-  it('should return the current server date and time', async () => {
-    const response = await request(app).get('/server-time');
+describe("GET /server-time", () => {
+  it("should return the current server date and time", async () => {
+    const response = await request(app).get("/server-time");
     expect(response.status).toBe(200);
-    expect(response.body).toHaveProperty('currentTime');
+    expect(response.body).toHaveProperty("currentTime");
+  });
+});
+
+describe("Handle Incorrect Endpoints /handleIncorrectEndpoint", () => {
+  it("should return 404 and list available endpoints", async () => {
+    const response = await request(app).get("/non-existent-endpoint");
+    expect(response.status).toBe(404);
+    expect(response.body).toEqual({
+      message: "You have hit an incorrect endpoint.",
+      availableEndpoints: [
+        {
+          method: "GET",
+          path: "/token",
+          description: "Generates and returns a token",
+        },
+        {
+          method: "GET",
+          path: "/protected",
+          description:
+            "Protected route that requires authentication header and token",
+        },
+        {
+          method: "GET",
+          path: "/server-time",
+          description: "Returns the current server date and time",
+        },
+      ],
+    });
   });
 });

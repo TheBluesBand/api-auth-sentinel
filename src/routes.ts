@@ -1,5 +1,5 @@
 import { Router } from "express"; // Import the Router class from the express package
-import { verifyToken, getToken, protectedRoute, getServerTime } from "./controllers"; // Import the controller functions and middleware from controllers.ts
+import { verifyToken, getToken, protectedRoute, getServerTime, handleIncorrectEndpoint } from "./controllers"; // Import the controller functions and middleware from controllers.ts
 
 const router: Router = Router(); // Create a new router object
 
@@ -20,5 +20,7 @@ router.get("/protected", verifyToken, protectedRoute);
 // Description: This route is used to check if the server is up and running by returning the current date and time.
 router.get("/server-time", getServerTime);
 
+// Catch-all route to handle unmatched routes and redirect to /server-time
+router.all("*", handleIncorrectEndpoint);
 
 export default router; // Export the router object as the default export of the module
