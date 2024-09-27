@@ -35,6 +35,7 @@ This repository demonstrates how to implement middleware authentication in an Ex
    `npm start`
 
 ##### Alternatively
+
 1. You can run and build the server in one step:
    ` npm run build-and-start`
 
@@ -43,15 +44,17 @@ This repository demonstrates how to implement middleware authentication in an Ex
 In this project, we use a simple modulo operation as a part of our token-based authentication strategy. The modulo operation helps in creating a basic form of security by ensuring that only tokens that satisfy a specific condition are considered valid.
 
 ### How It Works
+
 1. **Token Generation**:
 
 - A token is generated such that it satisfies a specific modulo condition. For example, a token is valid if it leaves a remainder of 3 when divided by 7.
 - This is achieved using the following function:
 
 ```typescript
+// Function to generate a token that satisfies the modulo condition
 function generateToken(): string {
-  const modulo = 7; // Hardcoded modulo value
-  const target = 3; // Hardcoded target value
+  const modulo: number = 7; // Hardcoded modulo value
+  const target: number = 3; // Hardcoded target value
   let token: number;
   do {
     token = Math.floor(Math.random() * 1000000); // Generate a random number between 0 and 999999
@@ -66,29 +69,37 @@ function generateToken(): string {
 - This is done using the following middleware:
 
 ```typescript
-import { Request, Response, NextFunction } from 'express';
+import { Request, Response, NextFunction } from "express";
 
-export const verifyToken = (req: Request, res: Response, next: NextFunction): void => {
-  const authHeader = req.headers['authorization'];
-
+export const verifyToken = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): void => {
+  const authHeader: string | undefined = req.headers["authorization"];
+  console.log("Authorization header:", authHeader);
   if (!authHeader) {
+    console.log("Authorization header missing");
     res.sendStatus(401);
     return;
   }
 
-  const token = parseInt(authHeader, 10);
-  const modulo = 7;
-  const target = 3;
-
+  const token: number = parseInt(authHeader, 10);
+  const modulo: number = 7;
+  const target: number = 3;
+  console.log("Token:", token);
   if (!isNaN(token) && token % modulo === target) {
+    console.log("Token is valid");
     next();
   } else {
+    console.log("Token is invalid");
     res.sendStatus(401);
   }
 };
 ```
 
 ### Why Use Modulo?
+
 - **Simplicity**: The modulo operation is simple to implement and understand.
 - **Basic Security**: While not a replacement for more robust security measures, using modulo can add an additional layer of validation to ensure tokens follow a specific pattern.
 - **Customisable**: The modulo value and target can be easily changed to create different validation rules.
@@ -98,11 +109,13 @@ This approach demonstrates how even basic mathematical operations can be utilize
 ## Testing
 
 - To run tests, use:
-   `npm test`
+  `npm test`
 - This will execute all the test files and generate a code coverage report.
 
 ## Project Structure
+
 The project structure is organized as follows:
+
 ```
 api-auth-sentinel/
 ├── src/
