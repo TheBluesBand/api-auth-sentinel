@@ -8,6 +8,8 @@ This repository demonstrates how to implement middleware authentication in an Ex
 - [Building the Project](#building-the-project)
 - [Security Using Modulo](#security-using-modulo)
 - [Testing](#testing)
+- [Project Structure](#project-structure)
+- [Routes](#routes)
 - [Scripts](#scripts)
 - [License](#license)
 
