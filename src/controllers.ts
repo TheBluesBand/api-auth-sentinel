@@ -7,9 +7,7 @@ export const verifyToken = (
   next: NextFunction
 ): void => {
   const authHeader: string | undefined = req.headers["authorization"];
-  console.log("Authorization header:", authHeader);
   if (!authHeader) {
-    console.log("Authorization header missing");
     res.sendStatus(401);
     return;
   }
@@ -19,10 +17,8 @@ export const verifyToken = (
   const target: number = 3;
   console.log("Token:", token);
   if (!isNaN(token) && token % modulo === target) {
-    console.log("Token is valid");
     next();
   } else {
-    console.log("Token is invalid");
     res.sendStatus(401);
   }
 };
