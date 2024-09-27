@@ -99,6 +99,35 @@ This approach demonstrates how even basic mathematical operations can be utilize
    `npm test`
 - This will execute all the test files and generate a code coverage report.
 
+## Project Structure
+The project structure is organized as follows:
+```
+api-auth-sentinel/
+├── src/
+│   ├── controllers.ts
+│   ├── routes.ts
+│   └── index.ts
+├── .github/
+│   └── workflows/
+│       └── build-and-start.yml
+├── .gitignore
+├── jest.config.js
+├── package.json
+├── README.md
+└── tsconfig.json
+```
+
+## File Descriptions
+
+- **src/controllers.ts**: Contains the controller functions and middleware for handling requests and responses.
+- **src/routes.ts**: Defines the application routes and associates them with the corresponding controller functions.
+- **src/index.ts**: The entry point of the application, sets up the Express server and applies the routes.
+- **.github/workflows/build-and-start.yml**: GitHub Actions workflow file to build and start the application on push.
+- **.gitignore**: Specifies files and directories to be ignored by Git.
+- **jest.config.js**: Configuration file for Jest, specifying how tests should be run.
+- **package.json**: Contains the project metadata and dependencies.
+- **README.md**: The project documentation.
+- **tsconfig.json**: TypeScript configuration file.
 
 ##### Reviewing Code Coverage
 
@@ -110,15 +139,3 @@ The code coverage report is generated in the coverage directory. You can view th
 - `npm start`: Runs the compiled JavaScript files using Node.js.
 - `npm run build-and-start`: Compiles the TypeScript files and then starts the server.
 - `npm test`: Runs the tests and generates a coverage report.
-
-## License
-
-The MIT License (MIT)
-
-Copyright (c) 2023 Jake McCoy
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software", within this repository), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
