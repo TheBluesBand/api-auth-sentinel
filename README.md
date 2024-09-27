@@ -5,6 +5,7 @@ This repository demonstrates how to implement middleware authentication in an Ex
 ## Table of Contents
 
 - [Installation](#installation)
+- [Importing Postman Collection](#importing-postman-collection)
 - [Building the Project](#building-the-project)
 - [Security Using Modulo](#security-using-modulo)
 - [Testing](#testing)
