@@ -152,6 +152,7 @@ api-auth-sentinel/
 
 ## File Descriptions
 
+- **postman/auth-api-sentinal.postman_collection.json**: Contains the file used to import the API requests into Postman
 - **src/controllers.ts**: Contains the controller functions and middleware for handling requests and responses.
 - **src/routes.ts**: Defines the application routes and associates them with the corresponding controller functions.
 - **src/index.ts**: The entry point of the application, sets up the Express server and applies the routes.
