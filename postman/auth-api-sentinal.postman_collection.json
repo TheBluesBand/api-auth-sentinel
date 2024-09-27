@@ -1,0 +1,142 @@
+{
+	"info": {
+		"_postman_id": "f6af952d-fe81-494b-8fcc-d5bc3e654030",
+		"name": "auth-api-sentinal",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "34023636"
+	},
+	"item": [
+		{
+			"name": "Get Token",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "localhost:3000/token"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Server Time",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "localhost:3000/server-time"
+			},
+			"response": []
+		},
+		{
+			"name": "Valid Token",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Cache-Control",
+						"value": "no-cache",
+						"name": "cache-control",
+						"type": "text"
+					},
+					{
+						"key": "Postman-Token",
+						"value": "<calculated when request is sent>",
+						"name": "postman-token",
+						"type": "text"
+					},
+					{
+						"key": "Host",
+						"value": "<calculated when request is sent>",
+						"name": "host",
+						"type": "text"
+					},
+					{
+						"key": "User-Agent",
+						"value": "PostmanRuntime/7.39.1",
+						"name": "user-agent",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "*/*",
+						"name": "accept",
+						"type": "text"
+					},
+					{
+						"key": "Accept-Encoding",
+						"value": "gzip, deflate, br",
+						"name": "accept-encoding",
+						"type": "text"
+					},
+					{
+						"key": "Connection",
+						"value": "keep-alive",
+						"name": "connection",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "681502",
+						"type": "text"
+					}
+				],
+				"url": "localhost:3000/protected"
+			},
+			"response": []
+		},
+		{
+			"name": "Invalid Valid Token",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Cache-Control",
+						"value": "no-cache",
+						"name": "cache-control",
+						"type": "text"
+					},
+					{
+						"key": "Postman-Token",
+						"value": "<calculated when request is sent>",
+						"name": "postman-token",
+						"type": "text"
+					},
+					{
+						"key": "Host",
+						"value": "<calculated when request is sent>",
+						"name": "host",
+						"type": "text"
+					},
+					{
+						"key": "User-Agent",
+						"value": "PostmanRuntime/7.39.1",
+						"name": "user-agent",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "*/*",
+						"name": "accept",
+						"type": "text"
+					},
+					{
+						"key": "Accept-Encoding",
+						"value": "gzip, deflate, br",
+						"name": "accept-encoding",
+						"type": "text"
+					},
+					{
+						"key": "Connection",
+						"value": "keep-alive",
+						"name": "connection",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "681501",
+						"type": "text"
+					}
+				],
+				"url": "localhost:3000/protected"
+			},
+			"response": []
+		}
+	]
+}

@@ -7,8 +7,17 @@ const port: number = 3000; // Define the port number on which the server will li
 // Middleware to log incoming API calls
 app.use(
   (req: express.Request, res: express.Response, next: express.NextFunction) => {
+    const startTime = Date.now();
+
+    res.on('finish', () => {
+        const endTime = Date.now();
+        const elapsedTime = endTime - startTime;
+        console.log(`Request processed in ${elapsedTime} ms\n`);
+    });
+
     console.log(`Received ${req.method} request for ${req.url}`);
-    next();
+
+    next(); // Call next() if the request path does not match any static files
   }
 );
 
