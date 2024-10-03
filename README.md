@@ -32,16 +32,18 @@ This repository demonstrates how to implement middleware authentication in an Ex
 To import the Postman collection JSON file into the Postman VS Code extension, follow these steps:
 
 1. **Install Postman Extension**:
+
    - Open Visual Studio Code.
    - Go to the Extensions view by clicking on the Extensions icon in the Activity Bar or pressing `Ctrl+Shift+X`.
    - Search for "Postman" and install the extension.
 
 2. **Open Postman Extension**:
+
    - Click on the Postman icon in the Activity Bar to open the Postman extension.
 
 3. **Import Collection**:
    - Click on the "Import" button in the Postman extension.
-   - Select the JSON file located in the [`postman`](command:_github.copilot.openRelativePath?%5B%7B%22scheme%22%3A%22file%22%2C%22authority%22%3A%22%22%2C%22path%22%3A%22%2Fd%3A%2FCoding%2Fapi-auth-sentinel%2Fpostman%22%2C%22query%22%3A%22%22%2C%22fragment%22%3A%22%22%7D%2C%22a2273ebe-ba73-4131-8322-12a05fbfd590%22%5D "d:\Coding\api-auth-sentinel\postman") directory of your project (e.g., `api-auth-sentinel/postman/your-collection.json`).
+   - Select the JSON file located in the [`postman`](command:_github.copilot.openRelativePath?%5B%7B%22scheme%22%3A%22file%22%2C%22authority%22%3A%22%22%2C%22path%22%3A%22%2Fd%3A%2FCoding%2Fapi-auth-sentinel%2Fpostman%22%2C%22query%22%3A%22%22%2C%22fragment%22%3A%22%22%7D%2C%22a2273ebe-ba73-4131-8322-12a05fbfd590%22%5D "d:\\Coding\api-auth-sentinel\postman") directory of your project (e.g., `api-auth-sentinel/postman/your-collection.json`).
    - Follow the prompts to complete the import process.
 
 By following these steps, you can easily import your Postman collection JSON file into the Postman VS Code extension and manage your API requests directly within Visual Studio Code. This is useful for demonstrating `auth-api-sentinal` locally.
@@ -137,6 +139,7 @@ api-auth-sentinel/
 ├── postman/
 │   └── auth-api-sentinal.postman_collection.json
 ├── src/
+│   ├── constants.ts
 │   ├── controllers.ts
 │   ├── routes.ts
 │   └── index.ts
@@ -153,6 +156,7 @@ api-auth-sentinel/
 ## File Descriptions
 
 - **postman/auth-api-sentinal.postman_collection.json**: Contains the file used to import the API requests into Postman
+- **src/constants.ts**: Contains the constants we use throughout the code. Currently its just the Modulo and Target values for our functions
 - **src/controllers.ts**: Contains the controller functions and middleware for handling requests and responses.
 - **src/routes.ts**: Defines the application routes and associates them with the corresponding controller functions.
 - **src/index.ts**: The entry point of the application, sets up the Express server and applies the routes.

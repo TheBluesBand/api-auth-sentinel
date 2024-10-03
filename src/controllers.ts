@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from "express"; // Import necessary types from the express package
+import { TARGET, MODULO } from "./constants";
 
 // Middleware to verify the token
 export const verifyToken = (
@@ -13,10 +14,8 @@ export const verifyToken = (
   }
 
   const token: number = parseInt(authHeader, 10);
-  const modulo: number = 7;
-  const target: number = 3;
   console.log("Token:", token);
-  if (!isNaN(token) && token % modulo === target) {
+  if (!isNaN(token) && token % MODULO === TARGET) {
     next();
   } else {
     res.sendStatus(401);
@@ -25,12 +24,10 @@ export const verifyToken = (
 
 // Function to generate a token that satisfies the modulo condition
 function generateToken(): string {
-  const modulo: number = 7; // Hardcoded modulo value
-  const target: number = 3; // Hardcoded target value
   let token: number;
   do {
     token = Math.floor(Math.random() * 1000000); // Generate a random number between 0 and 999999
-  } while (token % modulo !== target);
+  } while (token % MODULO !== TARGET);
   return token.toString();
 }
 
