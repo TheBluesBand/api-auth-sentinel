@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from "express"; // Import necessary types from the express package
+import { randomInt } from "crypto";
 import { TARGET, MODULO } from "./constants";
 
 // Middleware to verify the token
@@ -26,7 +27,7 @@ export const verifyToken = (
 function generateToken(): string {
   let token: number;
   do {
-    token = Math.floor(Math.random() * 1000000); // Generate a random number between 0 and 999999
+    token = randomInt(100000, 1000000); // Generate a random number between 100000 and 999999
   } while (token % MODULO !== TARGET);
   return token.toString();
 }
