@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "f6af952d-fe81-494b-8fcc-d5bc3e654030",
+		"_postman_id": "6a89f96c-d58a-4573-9707-c4bd3f8bdc72",
 		"name": "auth-api-sentinal",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
 		"_exporter_id": "34023636"
@@ -73,7 +73,7 @@
 					},
 					{
 						"key": "Authorization",
-						"value": "681502",
+						"value": "797688:1729121389150",
 						"type": "text"
 					}
 				],
@@ -130,7 +130,7 @@
 					},
 					{
 						"key": "Authorization",
-						"value": "681501",
+						"value": "797688:1",
 						"type": "text"
 					}
 				],

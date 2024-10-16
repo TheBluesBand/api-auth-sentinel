@@ -1,18 +1,31 @@
 import { Router } from "express"; // Import the Router class from the express package
-import { verifyToken, getToken, protectedRoute, getServerTime, handleIncorrectEndpoint } from "./controllers"; // Import the controller functions and middleware from controllers.ts
+import {
+  verifyToken,
+  getToken,
+  protectedRoute,
+  getServerTime,
+  handleIncorrectEndpoint,
+  tokenRateLimiter,
+  protectedRouteRateLimiter,
+} from "./controllers"; // Import the controller functions and middleware from controllers.ts
 
 const router: Router = Router(); // Create a new router object
 
 // Define the /token route
 // Method: GET
-// Handler: getToken - Generates and returns a JSON Web Token (JWT) to the user
-router.get("/token", getToken);
+// Handler: getToken - generates and returns a token, with rate limiting applied
+router.get("/token", tokenRateLimiter, getToken);
 
 // Define the /protected route
 // Method: GET
-// Middleware: verifyToken - Checks the validity of the JWT in the Authorization header
+// Middleware: verifyToken - Checks the validity of the token with rate limiting applied
 // Handler: protectedRoute - Responds with a message if the user is authenticated
-router.get("/protected", verifyToken, protectedRoute);
+router.get(
+  "/protected",
+  protectedRouteRateLimiter,
+  verifyToken,
+  protectedRoute
+);
 
 // Define the /server-time route
 // Method: GET
