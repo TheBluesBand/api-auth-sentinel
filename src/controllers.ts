@@ -1,6 +1,21 @@
 import { Request, Response, NextFunction } from "express"; // Import necessary types from the express package
 import { randomInt } from "crypto";
-import { TARGET, MODULO, TOKEN_LIFETIME_MS } from "./constants"; 
+import { TARGET, MODULO, TOKEN_LIFETIME_MS } from "./constants";
+import rateLimit from "express-rate-limit";
+
+//CAMERON - define rate limiting for the /token route
+export const tokenRateLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 10, // Limit each IP to 10 requests per window
+  message: "Too many requests for tokens, please try again later.",
+});
+
+//CAMERON - define rate limiting for the /protected route
+export const protectedRouteRateLimiter = rateLimit({
+  windowMs: 60 * 1000, //1 minute
+  max: 5, // Limit each IP to 5 requests - THIS IS TOKEN VALIDATION
+  message: "Too many token validation attempts, please try again later.",
+});
 
 // Middleware to verify the token
 export const verifyToken = (
@@ -51,7 +66,7 @@ export const verifyToken = (
 };
 
 // Function to generate a token that satisfies the modulo condition and includes an expiration time
-function generateToken(): string {
+export function generateToken(): string {
   let token: number;
   do {
     token = randomInt(100000, 1000000); // Generate a random number between 100000 and 999999

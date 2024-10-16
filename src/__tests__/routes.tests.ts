@@ -2,6 +2,7 @@ import request from "supertest";
 import express, { Request, Response, NextFunction } from "express";
 import { getToken, verifyToken } from "../controllers";
 import router from "../routes";
+import { generateToken } from "../controllers";
 
 const app = express();
 app.use("/", router);
@@ -10,15 +11,17 @@ describe("GET /token", () => {
   it("should return a token that satisfies the modulo condition", async () => {
     const response = await request(app).get("/token");
     const token = response.body.token;
-    expect(token % 7).toBe(3); // Check if the token satisfies the condition
+    const colonIndex = token.indexOf(":");
+    expect(token.substring(0, colonIndex) % 7).toBe(3); // Check if the token satisfies the condition
   });
 });
 
 describe("verifyToken middleware", () => {
   it("should call next if the token is valid", () => {
+    const validToken = generateToken();
     const req = {
       headers: {
-        authorization: "1000002", // Example token that satisfies the condition
+        authorization: validToken, // Example token that satisfies the condition
       },
     } as unknown as Request;
     const res = {
@@ -35,7 +38,7 @@ describe("verifyToken middleware", () => {
   it("should respond with 401 if the token is invalid", () => {
     const req = {
       headers: {
-        authorization: "1000004", // Example token that does not satisfy the condition
+        authorization: "797688:1", // Example token that does not satisfy the condition
       },
     } as unknown as Request;
     const res = {
