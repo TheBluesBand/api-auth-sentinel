@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express"; // Import necessary types from the express package
 import { randomInt } from "crypto";
-import { TARGET, MODULO } from "./constants";
+import { TARGET, MODULO, TOKEN_LIFETIME_MS } from "./constants"; 
 
 // Middleware to verify the token
 export const verifyToken = (
@@ -14,22 +14,51 @@ export const verifyToken = (
     return;
   }
 
-  const token: number = parseInt(authHeader, 10);
-  console.log("Token:", token);
+  //CAMERON - split token and expiry
+  const tokenParts = authHeader.split(":");
+  
+  //CAMERON - check both token and expiry present 
+  if (tokenParts.length !== 2) {
+    console.log("Token or expiration time missing");
+    res.sendStatus(401);
+    return;
+  }
+
+  const [tokenStr, expirationStr] = tokenParts;
+  const token: number = parseInt(tokenStr, 10);
+  const expirationTime: number = parseInt(expirationStr, 10);
+
+  //CAMERON - check if the expiration time is a valid number
+  if (isNaN(expirationTime)) {
+    console.log("Invalid or missing expiration time");
+    res.sendStatus(401);
+    return;
+  }
+
+  //CAMERON - is token expired
+  if (Date.now() > expirationTime) {
+    console.log("Token expired");
+    res.sendStatus(401);
+    return;
+  }
+
   if (!isNaN(token) && token % MODULO === TARGET) {
     next();
   } else {
     res.sendStatus(401);
+    return;  //CAMERON - stop the flow here if the token is invalid
   }
 };
 
-// Function to generate a token that satisfies the modulo condition
+// Function to generate a token that satisfies the modulo condition and includes an expiration time
 function generateToken(): string {
   let token: number;
   do {
     token = randomInt(100000, 1000000); // Generate a random number between 100000 and 999999
   } while (token % MODULO !== TARGET);
-  return token.toString();
+
+  const expirationTime = Date.now() + TOKEN_LIFETIME_MS; //CAMERON - set token expiration time 
+  return `${token}:${expirationTime}`;
 }
 
 // Controller to return a token
@@ -62,8 +91,7 @@ export const handleIncorrectEndpoint = (req: Request, res: Response) => {
       {
         method: "GET",
         path: "/protected",
-        description:
-          "Protected route that requires authentication header and token",
+        description: "Protected route that requires authentication header and token",
       },
       {
         method: "GET",
